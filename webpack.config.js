@@ -1,6 +1,10 @@
 // import path from node
 const path = require('path');
 
+// import webpack module so
+// the plugins feature works
+const webpack = require('webpack');
+
 // we pass 3 options into webpack:
 // entry, output, mode
 
@@ -13,6 +17,15 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'main.bundle.js'
     },
+    // plugins is a feature of webpack module
+    // it will allow webpack to recognize 
+    // dependencies, in this case jquery
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        }),
+    ],
     // default mode for webpack is production
     // we set it to development
     mode: 'development'
