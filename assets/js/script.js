@@ -2,9 +2,10 @@
 require("bootstrap");
 
 
-
-  
-
+// we must import img files
+// we will adjust carousel array
+const img1 = require("../../assets/img/food-table.jpg");
+const img2 = require("../../assets/img/grill.jpg");
  
   // First image is hard coded in index.html
   // we need to keep carousel logic in this file
@@ -13,14 +14,16 @@ require("bootstrap");
     {
       title: "We travel all over the US",
       subtitle: "Check out our schedule!",
-      img: "./assets/img/food-table.jpg",
+      // using variable for image
+      img: img1,
       btnText: "View Schedule",
       btnUrl: "schedule.html"
     },
     {
       title: "Our food is seriously the bomb!",
       subtitle: "What are you waiting for?",
-      img: "./assets/img/grill.jpg",
+      // using variable for image
+      img: img2,
       btnText: "Purchase Tickets",
       btnUrl: "tickets.html"
     },

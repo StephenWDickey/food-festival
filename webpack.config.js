@@ -30,6 +30,38 @@ module.exports = {
         filename: '[name].bundle.js',
         path: __dirname + "/dist",
     },
+    // we create module property, and implement
+    // a regex for our jpg images
+    // we also use our file-loader package
+    module: {
+        rules: [
+            {
+                // regex for .jpg files
+                test: /\.jpg$/i,
+                // implement file-loader package 
+                use: [
+                    {
+                        loader: 'file-loader',
+                        // with the options property we can be
+                        // more specific with how our images
+                        // are named and where they're sent
+                        options: {
+                            esModule: false,
+                            name (file) {
+                                return "[path][name].[ext]"
+                            },
+                            publicPath: function(url) {
+                                return url.replace("../", "/assets")
+                            }
+                        }
+                    },
+                    {
+                        loader: 'image-webpack-loader'
+                    }
+                ]
+            }
+        ]
+    },
     // plugins is a feature of webpack module
     // it will allow webpack to recognize 
     // dependencies, in this case jquery
