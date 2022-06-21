@@ -79,5 +79,11 @@ module.exports = {
     ],
     // default mode for webpack is production
     // we set it to development
-    mode: 'development'
+    mode: 'development',
+    // for some reason I had to add this
+    // to be able to access localhost:8080
+    // found this solution online
+    devServer: {
+        static: "./",
+    }
 };
