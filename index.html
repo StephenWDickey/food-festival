@@ -168,4 +168,17 @@
       <div class="footer-copyright text-center py-3 text-white">© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.</div>        
     </footer>
 </body>
+
+<!-- here we register our service worker -->
+<!-- service workers can be used without webpack -->
+<script>
+  (function() {
+    if("serviceWorker" in navigator) {
+      // this will link to our service-worker.js file that we will create in root
+      navigator.serviceWorker.register("./service-worker.js")
+      .then(() => console.log ("service worker registered successfully"))
+      .catch(error => console.log("Service worker failed", error)); 
+    }
+  })();
+</script>
 </html>
