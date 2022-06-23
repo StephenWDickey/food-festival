@@ -10,6 +10,14 @@ const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
+// import webpack-pwa-manifest plugin
+// to help us create manifest.json file
+// so we can make this app a PWA
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+// now we can invoke this in the plugins section
+
+
+
 // we pass 3 options into webpack:
 // entry, output, mode
 module.exports = {
@@ -75,7 +83,33 @@ module.exports = {
             // generates a report in dist directory
             // can be set to disable
             analyzerMode: "static",
+        }),
+        // we write new WebpackPwaManifest to invoke the
+        // constructor function for the manifest
+        new WebpackPwaManifest({
+            name: "Food Event",
+            short_name: "Foodies",
+            description: "An app that allows you to view upcoming food events.",
+            // specifies homepage in relation to manifest file
+            start_url: "../index.html",
+            background_color: "#01579b",
+            theme_color: "#ffffff",
+            // this will create unique fingerprints each time
+            // a manifest is generated, but we dont want that
+            fingerprints: false,
+            // this is related to fingerprints, but
+            // since it is false we do not need this property
+            inject: false,
+            icons: [{
+                // takes the icon from here, and creates sizes
+                // specified in the array
+                // then it is sent to destination directory specified
+                src: path.resolve("assets/img/icons/icon-512x512.png"),
+                sizes: [96, 128, 192, 256, 384, 512],
+                destination: path.join("assets", "icons")
+            }]
         })
+
     ],
     // default mode for webpack is production
     // we set it to development
